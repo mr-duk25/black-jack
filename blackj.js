@@ -1,10 +1,17 @@
 
 // /*----- constants -----*/
-// test pushhh
+
 // -create suits, ranks, and deck
 //- probably use arrays
 
 // /*----- app's state (variables) -----*/
+let dealerSum;
+let dealerAceCount;
+
+let playerSum;
+let playerAceCount;
+
+let turn;
 
 // -think about state variables
 // ->turn, player, dealer, played cards, count of cards

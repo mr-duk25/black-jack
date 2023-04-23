@@ -5,9 +5,8 @@
 body {
   height: 100vh;
   font-family: sans-serif;
+  background-color: darkslateblue;
 }
-
-
 
 .card {
   box-sizing: border-box;
@@ -36,8 +35,31 @@ body {
   /* Optional styles for cards: borderless and drop shadow. */
   /* Not a card, but a card-shaped outline to represent a
      droppable place, like an empty pile. */ }
-     .card.shadow {
-      box-shadow: 2px 2px 3px 0 rgba(41, 41, 41, 0.75); }
+
+
+
+.dealer-cards {
+  background-color: #fff;
+  display: inline-flex;
+  margin: -10vmin 5vmin 10vmin 10vmin;
+  background-color: #fff;
+  border-radius: 0.20em;
+  border: 3px solid #020000;
+}
+
+.player-cards {
+  background-color: #fff;
+  display: inline-flex;
+  margin: -10vmin 5vmin 10vmin 10vmin;
+  border-radius: 0.20em;
+  border: 3px solid #020000;
+}
+  
+p {
+  display: inline-flex;
+  margin: 20vmin;
+  background-color: aliceblue;
+}
 
 button {
   display: block;
