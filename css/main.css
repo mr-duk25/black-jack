@@ -69,12 +69,12 @@ p {
 
 .button {
   display: inline-flex;
-  
 }
 
 #hit {
   font-family: 'Sedgwick Ave Display', cursive;
-margin-top: 4vmin;
+  width: 20vmin;
+margin: 4vmin;
 padding: 2vmin;
 font-size: 2vmin;
 border-radius: 2vmin;
@@ -88,7 +88,8 @@ color: gray;
 }
 #stay {
   font-family: 'Sedgwick Ave Display', cursive;
-margin-top: 4vmin;
+  width: 20vmin;
+margin: 4vmin;
 padding: 2vmin;
 font-size: 2vmin;
 border-radius: 2vmin;
@@ -102,7 +103,8 @@ color: gray;
 }
 #deal {
   font-family: 'Sedgwick Ave Display', cursive;
-margin-top: 4vmin;
+  width: 20vmin;
+margin: 4vmin;
 padding: 2vmin;
 font-size: 2vmin;
 border-radius: 2vmin;
