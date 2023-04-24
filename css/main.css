@@ -6,8 +6,7 @@ body {
   height: 100vh;
   font-family: sans-serif;
   background-color: darkslateblue;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
 }
 
 .card {
@@ -40,19 +39,19 @@ body {
 
 
 
-.dealer-cards {
+.dealer-cards img {
   background-color: #fff;
   display: inline-flex;
-  margin: 10vmin 5vmin 10vmin 10vmin;
+  margin: 10vmin 0vmin 10vmin 0vmin;
   background-color: #fff;
   border-radius: 0.20em;
   border: 3px solid #020000;
 }
 
-.player-cards {
+.player-cards img {
   background-color: #fff;
   display: inline-flex;
-  margin: 10vmin 5vmin 10vmin 10vmin;
+  margin: 10vmin 0vmin 10vmin 0vmin;
   background-color: #fff;
   border-radius: 0.20em;
   border: 3px solid #020000;
@@ -70,6 +69,7 @@ p {
 
 .button {
   display: inline-flex;
+  
 }
 
 #hit {
