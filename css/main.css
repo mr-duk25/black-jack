@@ -6,6 +6,8 @@ body {
   height: 100vh;
   font-family: sans-serif;
   background-color: darkslateblue;
+  justify-content: center;
+  align-items: center;
 }
 
 .card {
@@ -41,7 +43,7 @@ body {
 .dealer-cards {
   background-color: #fff;
   display: inline-flex;
-  margin: -10vmin 5vmin 10vmin 10vmin;
+  margin: 10vmin 5vmin 10vmin 10vmin;
   background-color: #fff;
   border-radius: 0.20em;
   border: 3px solid #020000;
@@ -50,29 +52,65 @@ body {
 .player-cards {
   background-color: #fff;
   display: inline-flex;
-  margin: -10vmin 5vmin 10vmin 10vmin;
+  margin: 10vmin 5vmin 10vmin 10vmin;
+  background-color: #fff;
   border-radius: 0.20em;
   border: 3px solid #020000;
 }
-  
+
 p {
-  display: inline-flex;
-  margin: 20vmin;
+  display: block;
+  padding: 1 1 1 1;
+  margin: 5vmin;
+  width: 15vmin;
+  height: 8vmin;
+  font-size: 5vmin;
   background-color: aliceblue;
 }
 
-button {
-  display: block;
-  margin: 10px auto;
-  padding: 10px;
-  font-size: 16px;
-  color: grey;
-  border: 1px solid grey;
-  border-radius: 4px;
-  outline: none;
+.button {
+  display: inline-flex;
 }
 
-button:hover {
-  background-color: grey;
+#hit {
+  font-family: 'Sedgwick Ave Display', cursive;
+margin-top: 4vmin;
+padding: 2vmin;
+font-size: 2vmin;
+border-radius: 2vmin;
+border: 0.1vmin solidgray;
+color: gray;
+}
+
+#hit:hover {
   color: white;
+  background-color: darkgray;
+}
+#stay {
+  font-family: 'Sedgwick Ave Display', cursive;
+margin-top: 4vmin;
+padding: 2vmin;
+font-size: 2vmin;
+border-radius: 2vmin;
+border: 0.1vmin solidgray;
+color: gray;
+}
+
+#stay:hover {
+  color: white;
+  background-color: darkgray;
+}
+#deal {
+  font-family: 'Sedgwick Ave Display', cursive;
+margin-top: 4vmin;
+padding: 2vmin;
+font-size: 2vmin;
+border-radius: 2vmin;
+border: 0.1vmin solidgray;
+color: gray;
+}
+
+#deal:hover {
+  color: white;
+  background-color: darkgray;
 }
