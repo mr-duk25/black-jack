@@ -1,8 +1,8 @@
 
 // /*----- constants -----*/
 
-// const player = [playerHand];
-// const dealer = [dealerHand];
+const player = 0;
+const dealer = 0;
 
 // -create suits, ranks, and deck
 //- probably use arrays
@@ -12,8 +12,8 @@
 // ->turn, player, dealer, played cards, count of cards
 
 
-let dealerTotal = 0;
-let playerTotal = 0;
+let dealerHand;
+let playerHand;
 
 let dealerAce = 0; 
 let playerAce = 0;
@@ -42,13 +42,18 @@ const buttons = document.querySelectorAll(".button");
 // -different for different bets perhaps
 
 // /*----- functions -----*/
+function init () {
 buildDeck();
 shuffleDeck();
+renderGame();
+}
+
+
 
 function renderGame() {
-    shuffleDeck;
-    deal(2);
-    
+    dealerHand = cardValue(deal(3));
+   playerHand = cardValue(deal(2));
+   console.log(dealerHand, playerHand)
 }
 
 function buildDeck() {
@@ -73,7 +78,7 @@ function shuffleDeck() {
     return deck;
 }
 
-console.log(deck);
+
 
 function deal(numCards) {
     let shuffledDeck = shuffleDeck();
@@ -85,11 +90,35 @@ function deal(numCards) {
 }
 
 
+function cardValue(hand) {
+    let handTotal = [];
+    handTotal.push(...hand)
+    let total = 0;
+    for(let i =0; i < hand.length; i++) {
+        let value = hand[i].split("-");
+        if (isNaN(value[1]) && value[1] === "A") {
+            total += 11;
+        } else if (isNaN(value[1])){
+            total += 10;
+        } else {
+            total +=(parseInt(value[1]));
+        }
+    }
+    handTotal.push(total);
+    return handTotal;
+}
+        
+            
+            
 
-// // Calculating value of your hand?
-// function getCardValue() 
+
+
+init();
+
+// // // Calculating value of your hand?
+// function getCardValue(card) 
 //     let card = deck.pop();
-//     let value = card.split("-");
+//      value = deal(1).split("-");
 //     if (isNaN(value[1]) && value[1] === "A") {
 //       return 11;
 //     } else if (isNaN(value[1])){
@@ -97,8 +126,6 @@ function deal(numCards) {
 //     } else {
 //         return parseInt(value[1])
 //     }
-
-
 
 
 // Drawing cards?
