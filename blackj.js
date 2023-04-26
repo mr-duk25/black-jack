@@ -63,43 +63,30 @@ function init () {
 }
 
 
-//     function handleClickHit(evt) {
-    //         playerHand.unshift(...deal(1))
-    //         playerHand = cardValue(playerHand)
-    //         console.log(playerHand);
-    
-    //     renderGame();
-    // }
-    
-    
-    // function handleClickHit(evt) {
-    //     playerHand.unshift(...deal(1))
-    //     playerHand = cardValue(playerHand)
-    //     console.log(playerHand);
-        
-    //     renderGame();
-    // }
     
     function handleClickHit(evt) {
-        // Add cards to playerHand until its total value is 21 or greater
-        while (cardValue(playerHand) < 21) {
+        let val = playerHand[playerHand.length-1]
+        console.log(val)
+        if (val < 21) {
             playerHand.unshift(...deal(1));
-    
-            // Exit the loop if the total value of the playerHand is greater than or equal to 21
-            if (cardValue(playerHand) >= 21) {
-                break;
-            }
         }
     
-        // Calculate the total value of the playerHand
-        playerHand = cardValue(playerHand);
-    
-        // Log the playerHand to the console
+            // Exit the loop if the total value of the playerHand is greater than or equal to 21
+            else  {
+                console.log('its more than 21 we stopped adding cards')
+            }
+        playerHand = cardValue(playerHand)
         console.log(playerHand);
     
         // Render the game
         renderGame();
-    }
+        }
+    
+   
+   
+   
+   
+  
     
     // function handleClickStay(evt) {
         //     // Add cards to dealerHand until its total value is 17 or greater
@@ -147,7 +134,7 @@ function handleClickStay(evt) {
 }
 
 function renderGame() {
-
+let cardImg = document.createElement("img")
 }
 
 function buildDeck() {
