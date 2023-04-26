@@ -55,19 +55,25 @@ dealBtn.addEventListener('click', handleClick)
 function init () {
     buildDeck();
     shuffleDeck();
+    dealerHand = cardValue(deal(2));
+    playerHand = cardValue(deal(2));
+    console.log(dealerHand, playerHand)
     renderGame();
 }
 
 function handleClick(evt) {
-    // const click = button.indexOf(evt.target);
-    console.log("click");
+    playerHand.unshift(...deal(1))
+    playerHand = cardValue(playerHand)
+    console.log(playerHand);
+
+    
+    renderGame();
 }
 
 
+
 function renderGame() {
-    dealerHand = cardValue(deal(2));
-   playerHand = cardValue(deal(2));
-   console.log(dealerHand, playerHand)
+
 }
 
 function buildDeck() {
@@ -92,6 +98,7 @@ function shuffleDeck() {
     return deck;
 }
 
+// console.log(deck)
 
 
 function deal(numCards) {
@@ -109,19 +116,26 @@ function cardValue(hand) {
     handTotal.push(...hand)
     let total = 0;
     for(let i =0; i < hand.length; i++) {
-        let value = hand[i].split("-");
-        if (isNaN(value[1]) && value[1] === "A") {
-            total += 11;
-        } else if (isNaN(value[1])){
-            total += 10;
-        } else {
-            total +=(parseInt(value[1]));
+        if(typeof hand[i] !== "number") {
+            let value = hand[i].split("-");
+            if (isNaN(value[1]) && value[1] === "A") {
+                total += 11;
+            } else if (isNaN(value[1])){
+                total += 10;
+            } else {
+                total +=(parseInt(value[1]));
+            }} 
         }
-    }
-    handTotal.push(total);
+        if(typeof handTotal[handTotal.length -1] === "number") {
+            handTotal[handTotal.length -1] = total;
+        } else {
+            handTotal.push(total);
+        }
     return handTotal;
 }
-        
+
+    
+         
             
             
 
