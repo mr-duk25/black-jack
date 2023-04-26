@@ -3,8 +3,7 @@
 
 const player = 0;
 const dealer = 0;
- //allows player to hit while sum is < 21;
-const canHit = true;
+
 // -create suits, ranks, and deck
 //- probably use arrays
 
@@ -29,6 +28,7 @@ let hidden;
 // /*----- cached element references -----*/
 
 // -hit, stand, reset buttons
+//allows player to hit while sum is < 21;
 const hitBtn = document.getElementById("hit");
 const stayBtn = document.getElementById("stay");
 const dealBtn = document.getElementById("deal");
@@ -62,20 +62,48 @@ function init () {
     renderGame();
 }
 
+
+//     function handleClickHit(evt) {
+    //         playerHand.unshift(...deal(1))
+    //         playerHand = cardValue(playerHand)
+    //         console.log(playerHand);
+    
+    //     renderGame();
+    // }
+    
+    
+    // function handleClickHit(evt) {
+    //     playerHand.unshift(...deal(1))
+    //     playerHand = cardValue(playerHand)
+    //     console.log(playerHand);
+        
+    //     renderGame();
+    // }
     
     function handleClickHit(evt) {
-        playerHand.unshift(...deal(1))
-        playerHand = cardValue(playerHand)
+        // Add cards to playerHand until its total value is 21 or greater
+        while (cardValue(playerHand) < 21) {
+            playerHand.unshift(...deal(1));
+    
+            // Exit the loop if the total value of the playerHand is greater than or equal to 21
+            if (cardValue(playerHand) >= 21) {
+                break;
+            }
+        }
+    
+        // Calculate the total value of the playerHand
+        playerHand = cardValue(playerHand);
+    
+        // Log the playerHand to the console
         console.log(playerHand);
     
-    renderGame();
-}
-   
-
-
-// function handleClickStay(evt) {
-//     // Add cards to dealerHand until its total value is 17 or greater
-//     while (cardValue(dealerHand) < 17) {
+        // Render the game
+        renderGame();
+    }
+    
+    // function handleClickStay(evt) {
+        //     // Add cards to dealerHand until its total value is 17 or greater
+        //     while (cardValue(dealerHand) < 17) {
 //         dealerHand.unshift(...deal(1));
         
 //         // Exit the loop if the total value of the dealerHand is greater than or equal to 17
