@@ -29,29 +29,43 @@ const canHit = true; //allows player to hit while sum is < 21;
 // /*----- cached element references -----*/
 
 // -hit, stand, reset buttons
-const buttons = document.querySelectorAll(".button");
+const hitBtn = document.getElementById("hit");
+const stayBtn = document.getElementById("stay");
+const dealBtn = document.getElementById("deal");
 // -containers for player and dealer cards
 // -win message
 // -dealer and player score
-// -balance, bet amount, etc
-// /*----- event listeners -----*/
 
+
+
+// /*----- event listeners -----*/
 // -reset button
 // -hit, stand buttons
-// document.querySelectorAll("button").addEventListener('click', buttons);
-// -different for different bets perhaps
+hitBtn.addEventListener('click', handleClick)
+stayBtn.addEventListener('click', handleClick)
+dealBtn.addEventListener('click', handleClick)
+
+
+
+
 
 // /*----- functions -----*/
+
+
 function init () {
-buildDeck();
-shuffleDeck();
-renderGame();
+    buildDeck();
+    shuffleDeck();
+    renderGame();
+}
+
+function handleClick(evt) {
+    // const click = button.indexOf(evt.target);
+    console.log("click");
 }
 
 
-
 function renderGame() {
-    dealerHand = cardValue(deal(3));
+    dealerHand = cardValue(deal(2));
    playerHand = cardValue(deal(2));
    console.log(dealerHand, playerHand)
 }
