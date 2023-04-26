@@ -3,7 +3,8 @@
 
 const player = 0;
 const dealer = 0;
-
+ //allows player to hit while sum is < 21;
+const canHit = true;
 // -create suits, ranks, and deck
 //- probably use arrays
 
@@ -23,7 +24,6 @@ let deck;
 let hidden;
 
 
-const canHit = true; //allows player to hit while sum is < 21;
 
 
 // /*----- cached element references -----*/
@@ -41,9 +41,10 @@ const dealBtn = document.getElementById("deal");
 // /*----- event listeners -----*/
 // -reset button
 // -hit, stand buttons
-hitBtn.addEventListener('click', handleClick)
-stayBtn.addEventListener('click', handleClick)
-dealBtn.addEventListener('click', handleClick)
+hitBtn.addEventListener('click', handleClickHit)
+stayBtn.addEventListener('click', handleClickStay)
+// stayBtn.addEventListener('click', handleClick)
+// dealBtn.addEventListener('click', handleClick)
 
 
 
@@ -61,16 +62,61 @@ function init () {
     renderGame();
 }
 
-function handleClick(evt) {
-    playerHand.unshift(...deal(1))
-    playerHand = cardValue(playerHand)
-    console.log(playerHand);
-
+    
+    function handleClickHit(evt) {
+        playerHand.unshift(...deal(1))
+        playerHand = cardValue(playerHand)
+        console.log(playerHand);
     
     renderGame();
 }
+   
 
 
+// function handleClickStay(evt) {
+//     // Add cards to dealerHand until its total value is 17 or greater
+//     while (cardValue(dealerHand) < 17) {
+//         dealerHand.unshift(...deal(1));
+        
+//         // Exit the loop if the total value of the dealerHand is greater than or equal to 17
+//         if (cardValue(dealerHand) >= 17) {
+//             break;
+//         }
+//     }
+
+//     // Calculate the total value of the dealerHand
+//     dealerHand = cardValue(dealerHand);
+
+//     // Log the dealerHand to the console
+//     console.log(dealerHand);
+  
+//     // Render the game
+//     renderGame();
+// }
+
+
+
+
+function handleClickStay(evt) {
+    // Add cards to dealerHand until its total value is 17 or greater
+    while (cardValue(dealerHand) < 17) {
+        dealerHand.unshift(...deal(1));
+        
+        // Exit the loop if the total value of the dealerHand is greater than or equal to 17
+        if (cardValue(dealerHand) >= 17) {
+            break;
+        }
+    }
+
+    // Calculate the total value of the dealerHand
+    dealerHand = cardValue(dealerHand);
+
+    // Log the dealerHand to the console
+    console.log(dealerHand);
+  
+    // Render the game
+    renderGame();
+}
 
 function renderGame() {
 
@@ -87,6 +133,7 @@ function buildDeck() {
     }
    
 }
+
 //Fisher-Yates algorithm
 function shuffleDeck() {
     for(let i = 0; i < deck.length; i++) {
@@ -97,9 +144,6 @@ function shuffleDeck() {
     }
     return deck;
 }
-
-// console.log(deck)
-
 
 function deal(numCards) {
     let shuffledDeck = shuffleDeck();
@@ -142,19 +186,6 @@ function cardValue(hand) {
 
 
 init();
-
-// // // Calculating value of your hand?
-// function getCardValue(card) 
-//     let card = deck.pop();
-//      value = deal(1).split("-");
-//     if (isNaN(value[1]) && value[1] === "A") {
-//       return 11;
-//     } else if (isNaN(value[1])){
-//         return 10;
-//     } else {
-//         return parseInt(value[1])
-//     }
-
 
 // Drawing cards?
 
