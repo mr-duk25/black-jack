@@ -15,8 +15,7 @@ const dealer = 0;
 let dealerHand;
 let playerHand;
 
-let dealerAce = 0; 
-let playerAce = 0;
+let aceCount = [];
 
 let deck;
 
@@ -43,8 +42,7 @@ const dealBtn = document.getElementById("deal");
 // -hit, stand buttons
 hitBtn.addEventListener('click', handleClickHit)
 stayBtn.addEventListener('click', handleClickStay)
-// stayBtn.addEventListener('click', handleClick)
-// dealBtn.addEventListener('click', handleClick)
+// dealBtn.addEventListener('click', handleClickDeal)
 
 
 
@@ -56,90 +54,95 @@ stayBtn.addEventListener('click', handleClickStay)
 function init () {
     buildDeck();
     shuffleDeck();
-    dealerHand = cardValue(deal(2));
-    playerHand = cardValue(deal(2));
+    renderGame();
+    // dealerHand = cardValue(deal(2));
+    dealerHand = deal(2);
+    playerHand = deal(2);
     console.log(dealerHand, playerHand)
-    renderGame();
 }
 
-
-    
-    function handleClickHit(evt) {
-        let val = playerHand[playerHand.length-1]
-        console.log(val)
-        if (val < 21) {
-            playerHand.unshift(...deal(1));
-        }
-    
-            // Exit the loop if the total value of the playerHand is greater than or equal to 21
-            else  {
-                console.log('its more than 21 we stopped adding cards')
-            }
-        playerHand = cardValue(playerHand)
-        console.log(playerHand);
-    
-        // Render the game
-        renderGame();
-        }
-    
-   
-   
-   
-   
-  
-    
-    // function handleClickStay(evt) {
-        //     // Add cards to dealerHand until its total value is 17 or greater
-        //     while (cardValue(dealerHand) < 17) {
-//         dealerHand.unshift(...deal(1));
-        
-//         // Exit the loop if the total value of the dealerHand is greater than or equal to 17
-//         if (cardValue(dealerHand) >= 17) {
-//             break;
-//         }
-//     }
-
-//     // Calculate the total value of the dealerHand
-//     dealerHand = cardValue(dealerHand);
-
-//     // Log the dealerHand to the console
-//     console.log(dealerHand);
-  
-//     // Render the game
-//     renderGame();
-// }
-
-
-
-
-function handleClickStay(evt) {
-    // Add cards to dealerHand until its total value is 17 or greater
-    while (cardValue(dealerHand) < 17) {
-        dealerHand.unshift(...deal(1));
-        
-        // Exit the loop if the total value of the dealerHand is greater than or equal to 17
-        if (cardValue(dealerHand) >= 17) {
-            break;
-        }
-    }
-
-    // Calculate the total value of the dealerHand
-    dealerHand = cardValue(dealerHand);
-
-    // Log the dealerHand to the console
-    console.log(dealerHand);
-  
-    // Render the game
-    renderGame();
-}
 
 function renderGame() {
-let cardImg = document.createElement("img")
+// let cardImg = document.createElement("img");
+// let card = deal(1);
+// cardImg.src = "./imges/" + card + ".svg";
+// dealerHand += cardValue(dealerHand)
+// document.querySelectorAll(".player-cards").append(cardImg);
 }
 
-function buildDeck() {
-    let values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-    let suit = ["clubs", "diamonds", "hearts", "spades"];
+
+    // function handleClickHit(evt) {
+    //     let val = playerHand[playerHand.length-1]
+    //     console.log(val)
+    //     if (val < 21) {
+    //         playerHand.unshift(...deal(1));
+    //     }
+    
+    //         // Exit the loop if the total value of the playerHand is greater than or equal to 21
+    //         else  {
+    //            return  console.log(`You Bust`)
+    //         }
+    //     playerHand = cardValue(playerHand)
+    //     console.log(playerHand);
+    
+    //     // Render the game
+    //     renderGame();
+    //     }
+
+   
+   
+   
+   
+   
+        function handleClickHit(evt) {
+            let val = cardValue(playerHand)
+            if (val < 21) {
+                playerHand.unshift(...deal(1));
+                console.log(playerHand);
+                console.log(val)
+            } else  {
+                return  console.log(`You Bust`)
+            }
+            renderGame();
+       }
+    
+        // Exit the loop if the total value of the playerHand is greater than or equal to 21
+    
+        function handleClickStay(evt) {
+            // Add cards to dealerHand until its total value is 17 or greater
+            let valDealer = dealerHand[dealerHand.length - 1]
+            let valPlayer = playerHand[playerHand.length - 1]
+            if (valDealer < 17 && valPlayer <= 21) {
+                dealerHand.unshift(...deal(1));
+            } else {
+                console.log('Dealer')
+            }
+                // Exit the loop if the total value of the dealerHand is greater than or equal to 17
+        
+        
+        
+            // Calculate the total value of the dealerHand
+            dealerHand = cardValue(dealerHand);
+        
+            // Log the dealerHand to the console
+            console.log(dealerHand);
+          
+            // Render the game
+            renderGame();
+        }
+    
+        
+        
+        
+                    
+                    
+                    
+                    
+                  
+                    
+                    function buildDeck() {
+                        let values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+                        let suit = ["clubs", "diamonds", "hearts", "spades"];
     deck = [];
     for(let i = 0; i < suit.length; i++) {
         for(let j = 0; j < values.length; j++) {
@@ -170,28 +173,39 @@ function deal(numCards) {
 }
 
 
+
+
+
+
 function cardValue(hand) {
-    let handTotal = [];
-    handTotal.push(...hand)
     let total = 0;
+    let aceCount = 0;
     for(let i =0; i < hand.length; i++) {
-        if(typeof hand[i] !== "number") {
-            let value = hand[i].split("-");
-            if (isNaN(value[1]) && value[1] === "A") {
-                total += 11;
-            } else if (isNaN(value[1])){
-                total += 10;
-            } else {
-                total +=(parseInt(value[1]));
-            }} 
-        }
-        if(typeof handTotal[handTotal.length -1] === "number") {
-            handTotal[handTotal.length -1] = total;
-        } else {
-            handTotal.push(total);
-        }
-    return handTotal;
+       let value = 0;
+       const card = hand[i].split("-")[1]
+       if(card === "A") {
+            value = 11;
+            aceCount++
+       }else if(card === "J" || card === "Q" || card === "K") {
+            value = 10;
+       } else {
+            value = Number(card)
+       }
+       total+= value;
+     }
+     while(total > 21 && aceCount > 0) {
+        total-= 10;
+        aceCount--
+     } 
+    return total;
 }
+
+
+
+
+
+
+
 
     
          
