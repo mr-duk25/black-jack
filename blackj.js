@@ -64,11 +64,7 @@ function init () {
 
 
 function renderGame() {
-    // let cardImg = document.createElement("img");
-// let card = deal(1);
-// cardImg.src = "./imges/" + card + ".svg";
-// dealerHand += cardValue(dealerHand)
-// document.querySelectorAll(".player-cards").append(cardImg);
+
 }
 
 

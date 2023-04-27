@@ -6,11 +6,20 @@ body {
   height: 100vh;
   font-family: sans-serif;
   background-color: darkslateblue;
+  justify-content: center;
   text-align: center;
 }
 
+header {
+  font-size: 15vmin;
+  background-color:rgb(15, 115, 192);
+  font-family: 'Cormorant Garamond', serif;
+  border: 1vmin solid black;
+  
+}
+
 .card {
-  box-sizing: border-box;
+  /* box-sizing: border-box;
   display: inline-block;
   margin: 5px 5px 50px 5px;
   cursor: pointer;
@@ -25,8 +34,8 @@ body {
   background-size: contain;
   text-indent: 100%;
   white-space: nowrap;
-  overflow: hidden;
-  }
+  overflow: hidden; */
+}
 
 
 
@@ -37,6 +46,8 @@ body {
   background-color: #fff;
   border-radius: 0.20em;
   border: 3px solid #020000;
+  width: 9.0em;
+  height: 11.5em;
 }
 
 .player-cards img {
@@ -46,16 +57,31 @@ body {
   background-color: #fff;
   border-radius: 0.20em;
   border: 3px solid #020000;
+  width: 9.0em;
+  height: 11.5em;
 }
 
 p {
+  font-family: 'Cormorant Garamond', serif;
   display: block;
   padding: 1 1 1 1;
   margin: 5vmin;
   width: 15vmin;
   height: 8vmin;
-  font-size: 5vmin;
-  background-color: aliceblue;
+  font-size: 10vmin;
+}
+
+#results {
+  color: crimson;
+  
+}
+
+footer {
+display: inline-flex;
+justify-content: center;
+background-color: rgb(15, 115, 192);
+width: 100vmin;
+border: 0.5vmin solid #020000;
 }
 
 .button {
@@ -63,11 +89,11 @@ p {
 }
 
 #hit {
-  font-family: 'Sedgwick Ave Display', cursive;
-  width: 20vmin;
+font-family: 'Cormorant Garamond', serif;
+width: 20vmin;
 margin: 4vmin;
 padding: 2vmin;
-font-size: 2vmin;
+font-size: 4vmin;
 border-radius: 2vmin;
 border: 0.1vmin solidgray;
 color: gray;
@@ -78,26 +104,29 @@ color: gray;
   background-color: darkgray;
 }
 #stay {
-  font-family: 'Sedgwick Ave Display', cursive;
+  font-family: 'Cormorant Garamond', serif;
   width: 20vmin;
-margin: 4vmin;
-padding: 2vmin;
-font-size: 2vmin;
-border-radius: 2vmin;
-border: 0.1vmin solidgray;
-color: gray;
+  margin: 4vmin;
+  padding: 2vmin;
+  font-size: 4vmin;
+  border-radius: 2vmin;
+  border: 0.1vmin solidgray;
+  color: gray;
+  
 }
 
 #stay:hover {
   color: white;
   background-color: darkgray;
 }
+
 #deal {
-  font-family: 'Sedgwick Ave Display', cursive;
-  width: 20vmin;
+  
+font-family: 'Cormorant Garamond', serif;
+width: 20vmin;
 margin: 4vmin;
 padding: 2vmin;
-font-size: 2vmin;
+font-size: 4vmin;
 border-radius: 2vmin;
 border: 0.1vmin solidgray;
 color: gray;
