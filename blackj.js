@@ -36,7 +36,7 @@ let playerCardsDiv = document.querySelector(".player-cards");
 // -containers for player and dealer cards
 // -win message
 // -dealer and player score
-// document.getElementById("player-sum").innerText = `${cardValue(erHand)}`
+// let playerSum = document.getElementById("player-sum").innerText = `${cardValue(playerHand)}`
 let dealerCardSum = document.getElementById("dealer-sum");
 let gameResult = document.getElementById("results");
 
@@ -67,9 +67,22 @@ function init () {
 
 
 function renderGame() {
-
+    renderHand();
 }
 
+
+
+
+function renderHand(hand, playerCardsDiv) {
+    playerCardsDiv.innerHTML = '';
+  
+    hand.forEach(function(card) {
+      const img = document.createElement('img');
+      img.src = `images/${card}.png`; // Assumes card images are in the images folder and named according to their card value and suit, e.g. 2-clubs.png
+      img.classList.add('card');
+      container.appendChild(img);
+    });
+  }
 // playerHand.forEach(card => {
 //     let newCard = document.createElement(‘div’)
 //     newCard.classList.add(‘card’, card.face)
@@ -108,7 +121,6 @@ function handleClickHit(evt) {
             } 
             hitBtn.disabled = true;
             stayBtn.disabled = true;
-            // console.log(`Dealer Bust`)
             renderGame();
             winLogic()
         }
