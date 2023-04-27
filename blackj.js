@@ -67,29 +67,33 @@ function init () {
 
 
 function renderGame() {
-    renderHand();
+    renderHand(playerHand);
 }
 
 
 
 
-function renderHand(hand, playerCardsDiv) {
-    playerCardsDiv.innerHTML = '';
-  
-    hand.forEach(function(card) {
-      const img = document.createElement('img');
-      img.src = `images/${card}.png`; // Assumes card images are in the images folder and named according to their card value and suit, e.g. 2-clubs.png
-      img.classList.add('card');
-      container.appendChild(img);
-    });
-  }
+function renderHand() {
+    playerHand.forEach(card => {
+        let playerNewCard = document.createElement('div')
+        playerNewCard.classList.add('card', `${playerHand}`, 'large')
+        playerCardsDiv.append(playerNewCard)
+    })
+    
+    dealerHand.forEach(card => {
+        let dealerNewCard = document.createElement('div')
+        dealerNewCard.classList.add('card', `${dealerHand}`, 'large')
+        dealerCardsDiv.append(dealerNewCard)
+    })
+}
+
+
 // playerHand.forEach(card => {
-//     let newCard = document.createElement(‘div’)
-//     newCard.classList.add(‘card’, card.face)
-//     playerCards.append(newCard)
-// })
-// something like this
-   
+//         let newCard = document.createElement("div")
+//         newCard.classList.add("div", card.face)
+//         playerCards.append(newCard)
+//     })
+    // something like this
    
 function handleClickHit(evt) {
     playerHand.unshift(...deal(1));
@@ -136,8 +140,8 @@ function handleClickHit(evt) {
                   
                     
  function buildDeck() {
-    let values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-    let suit = ["clubs", "diamonds", "hearts", "spades"];
+    let values = ["02", "03", "04", "05", "06", "07", "08", "09", "10", "J", "Q", "K", "A"];
+    let suit = ["c", "d", "h", "s"];
          deck = [];
          for(let i = 0; i < suit.length; i++) {
          for(let j = 0; j < values.length; j++) {
