@@ -68,13 +68,20 @@ function init () {
     dealerHand = deal(2);
     playerHand = deal(2);
     renderHand();
+    winLogic();
+    hitBtn.disabled = false;
+    stayBtn.disabled = false;
+    turn = 1;
     // console.log(dealerHand, playerHand)
     console.log(dealerHand, playerHand)
     
 }
 
 
-
+// function hiddenCard () {
+//     let hideCard = dealerHand[0]
+//    hideCard.display = ;
+// }
 
 
 
@@ -84,13 +91,11 @@ function renderHand() {
         let playerNewCard = document.createElement('div')
         playerNewCard.classList.add('card', `${card}`, 'large')
         playerCardsDiv.append(playerNewCard)
-        winLogic();
     })
     dealerHand.forEach(card => {
         let dealerNewCard = document.createElement('div')
         dealerNewCard.classList.add('card', `${card}`, 'large')
         dealerCardsDiv.append(dealerNewCard)
-        winLogic();
     })
 }
 
@@ -114,13 +119,13 @@ function handleClickHit(evt) {
         
         // Exit the loop if the total value of the playerHand is greater than or equal to 21
         
-        function handleClickStay(evt) {
-            turn *= -1;
-            dealerTurn()
+function handleClickStay(evt) {
+     turn *= -1;
+        dealerTurn()
         }
 
-        function handleClickDeal (evt) {
-            init()
+function handleClickDeal (evt) {
+        init()
         }
     
 
@@ -173,9 +178,9 @@ function dealerTurn() {
     while (cardValue(dealerHand) < 17 && cardValue(playerHand) <= 21) {
         drawCard(dealerHand)
         cardValue(dealerHand)
-    }
-    console.log(dealerHand);
+    } 
     winLogic()
+    console.log(dealerHand);
     dealerCardSum.textContent = "Dealer: " + cardValue(dealerHand)
 
 }
@@ -228,9 +233,11 @@ function cardValue(array) {
         }
     }
     if (cardValue > 21 && turn === 1) {
-        hitBtn.style.display = "none"
+        hitBtn.disabled = true;
+        stayBtn.disabled = true;
     }
     return cardValue
+    winLogic();
 }
 
 
@@ -240,37 +247,53 @@ function winLogic() {
     const playerTotal = cardValue(playerHand);
     const dealerTotal = cardValue(dealerHand);
     console.log(turn)
+    // if(turn === 1 && playerTotal === 21) {
+    //     gameResult.textContent = 'Black-Jack!'
+    // }
     if(turn === 1) {
-        if (playerTotal > 21) {
-            console.log("Player Bust! Dealer Wins")
+      if (playerTotal > 21) {
+            gameResult.textContent = 'Player Bust. Dealer Wins!'
+            console.log("Player Bust. Dealer Wins!")
+        } 
+        if (playerTotal === 21) {
+            console.log("Black-Jack")
+            gameResult.textContent = 'Player Black-Jack'
+            hitBtn.disabled = true;
+            stayBtn.disabled = true;
         }
     }
-     else {
-    if (dealerTotal === playerTotal && dealerTotal <= 21) {
-        console.log("Push")
-        gameResult.textContent = 'Push'
-    }
-    if (playerTotal === 21) {
-        console.log("You Winsss")
-        gameResult.textContent = 'You Winsss'
-    }
-    if (dealerTotal === 21) {
-        console.log("Dealer Win")
-        gameResult.textContent = 'Dealer Wins'
-    }
-    if (playerTotal > dealerTotal && dealerTotal >= 17) {
-        console.log("You Winsss")
-        gameResult.textContent = 'You Winsss'
-
-    }
-    if (playerTotal < dealerTotal && dealerTotal <= 21) {
-        console.log("Dealer Wins")
-        gameResult.textContent = 'Dealer Wins'
-
-    }
-    if (playerTotal < dealerTotal && dealerTotal > 21) {
-        console.log("Dealer Bust! You Winsss")
-        gameResult.textContent = 'Dealer Bust! You Winsss'
+    else {
+        if (dealerTotal === playerTotal && dealerTotal <= 21) {
+            console.log("Push")
+            gameResult.textContent = 'Push'
+            hitBtn.disabled = true;
+            stayBtn.disabled = true;
+        }
+        if (dealerTotal === 21) {
+            console.log("Dealer Win")
+            gameResult.textContent = 'Dealer Wins'
+            hitBtn.disabled = true;
+            stayBtn.disabled = true;
+        }
+        if (playerTotal > dealerTotal && dealerTotal >= 17) {
+            console.log("You Winsss")
+            gameResult.textContent = 'You Winsss'
+            hitBtn.disabled = true;
+            stayBtn.disabled = true;
+            
+        }
+        if (playerTotal < dealerTotal && dealerTotal <= 21) {
+            console.log("Dealer Wins")
+            gameResult.textContent = 'Dealer Wins'
+            hitBtn.disabled = true;
+            stayBtn.disabled = true;
+            
+        }
+        if (playerTotal < dealerTotal && dealerTotal > 21) {
+            console.log("Dealer Bust! You Winsss")
+            gameResult.textContent = 'Dealer Bust! You Winsss'
+            hitBtn.disabled = true;
+            stayBtn.disabled = true;
 
     }
 }
