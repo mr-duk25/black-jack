@@ -30,12 +30,15 @@ let hidden;
 const hitBtn = document.getElementById("hit");
 const stayBtn = document.getElementById("stay");
 const dealBtn = document.getElementById("deal");
-let hiddenCardImg = document.getElementById("hidden")
-let dealerCardsImg = document.querySelector(".dealer-cards")
-let playerCardsImg = document.querySelector(".player-cards")
+let hiddenCardImg = document.getElementById("hidden");
+let dealerCardsDiv = document.querySelector(".dealer-cards");
+let playerCardsDiv = document.querySelector(".player-cards");
 // -containers for player and dealer cards
 // -win message
 // -dealer and player score
+// document.getElementById("player-sum").innerText = `${cardValue(erHand)}`
+let dealerCardSum = document.getElementById("dealer-sum");
+let gameResult = document.getElementById("results");
 
 
 
@@ -54,9 +57,9 @@ dealBtn.addEventListener('click', handleClickDeal)
 function init () {
     buildDeck();
     shuffleDeck();
-    renderGame();
     dealerHand = deal(2);
     playerHand = deal(2);
+    renderGame();
     // console.log(dealerHand, playerHand)
     console.log(dealerHand, playerHand)
     
@@ -67,7 +70,12 @@ function renderGame() {
 
 }
 
-
+// playerHand.forEach(card => {
+//     let newCard = document.createElement(‘div’)
+//     newCard.classList.add(‘card’, card.face)
+//     playerCards.append(newCard)
+// })
+// something like this
    
    
 function handleClickHit(evt) {
