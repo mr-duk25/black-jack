@@ -14,8 +14,7 @@ const dealer = 0;
 
 let dealerHand;
 let playerHand;
-
-let aceCount = [];
+let turn = 1;
 
 let deck;
 
@@ -31,6 +30,9 @@ let hidden;
 const hitBtn = document.getElementById("hit");
 const stayBtn = document.getElementById("stay");
 const dealBtn = document.getElementById("deal");
+let hiddenCardImg = document.getElementById("hidden")
+let dealerCardsImg = document.querySelector(".dealer-cards")
+let playerCardsImg = document.querySelector(".player-cards")
 // -containers for player and dealer cards
 // -win message
 // -dealer and player score
@@ -38,11 +40,9 @@ const dealBtn = document.getElementById("deal");
 
 
 // /*----- event listeners -----*/
-// -reset button
-// -hit, stand buttons
 hitBtn.addEventListener('click', handleClickHit)
 stayBtn.addEventListener('click', handleClickStay)
-// dealBtn.addEventListener('click', handleClickDeal)
+dealBtn.addEventListener('click', handleClickDeal)
 
 
 
@@ -55,15 +55,16 @@ function init () {
     buildDeck();
     shuffleDeck();
     renderGame();
-    // dealerHand = cardValue(deal(2));
     dealerHand = deal(2);
     playerHand = deal(2);
+    // console.log(dealerHand, playerHand)
     console.log(dealerHand, playerHand)
+    
 }
 
 
 function renderGame() {
-// let cardImg = document.createElement("img");
+    // let cardImg = document.createElement("img");
 // let card = deal(1);
 // cardImg.src = "./imges/" + card + ".svg";
 // dealerHand += cardValue(dealerHand)
@@ -71,84 +72,62 @@ function renderGame() {
 }
 
 
-    // function handleClickHit(evt) {
-    //     let val = playerHand[playerHand.length-1]
-    //     console.log(val)
-    //     if (val < 21) {
-    //         playerHand.unshift(...deal(1));
-    //     }
-    
-    //         // Exit the loop if the total value of the playerHand is greater than or equal to 21
-    //         else  {
-    //            return  console.log(`You Bust`)
-    //         }
-    //     playerHand = cardValue(playerHand)
-    //     console.log(playerHand);
-    
-    //     // Render the game
-    //     renderGame();
-    //     }
-
    
    
-   
-   
-   
-        function handleClickHit(evt) {
-            let val = cardValue(playerHand)
-            if (val < 21) {
-                playerHand.unshift(...deal(1));
-                console.log(playerHand);
-                console.log(val)
-            } else  {
-                return  console.log(`You Bust`)
-            }
+function handleClickHit(evt) {
+    playerHand.unshift(...deal(1));
+        let val = cardValue(playerHand)
+            if (val <= 21) {
+            console.log(playerHand);
+            console.log(val)
+        } else  {
+                    console.log(playerHand);
+                hitBtn.disabled = true;
+                }
             renderGame();
-       }
-    
+            winLogic()
+        }
+        
         // Exit the loop if the total value of the playerHand is greater than or equal to 21
-    
+        
         function handleClickStay(evt) {
-            // Add cards to dealerHand until its total value is 17 or greater
-            let valDealer = dealerHand[dealerHand.length - 1]
-            let valPlayer = playerHand[playerHand.length - 1]
-            if (valDealer < 17 && valPlayer <= 21) {
+            turn = -1;
+            let valDealer = cardValue(dealerHand)
+            let valPlayer = cardValue(playerHand)
+            while (valDealer < 17 && valPlayer <= 21) {
                 dealerHand.unshift(...deal(1));
-            } else {
-                console.log('Dealer')
-            }
-                // Exit the loop if the total value of the dealerHand is greater than or equal to 17
-        
-        
-        
-            // Calculate the total value of the dealerHand
-            dealerHand = cardValue(dealerHand);
-        
-            // Log the dealerHand to the console
-            console.log(dealerHand);
-          
-            // Render the game
+                valDealer = cardValue(dealerHand)
+                
+                
+                console.log(dealerHand);
+                console.log(valDealer)
+            } 
+            hitBtn.disabled = true;
+            stayBtn.disabled = true;
+            // console.log(`Dealer Bust`)
             renderGame();
+            winLogic()
+        }
+
+        function handleClickDeal (evt) {
+            hitBtn.disabled = false;
+            stayBtn.disabled = false;
+            init();
         }
     
-        
-        
-        
-                    
-                    
-                    
-                    
+    
+                        
                   
                     
-                    function buildDeck() {
-                        let values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-                        let suit = ["clubs", "diamonds", "hearts", "spades"];
-    deck = [];
-    for(let i = 0; i < suit.length; i++) {
-        for(let j = 0; j < values.length; j++) {
+ function buildDeck() {
+    let values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+    let suit = ["clubs", "diamonds", "hearts", "spades"];
+         deck = [];
+         for(let i = 0; i < suit.length; i++) {
+         for(let j = 0; j < values.length; j++) {
             deck.push(suit[i] + "-" + values[j]);
-        }
-    }
+             }
+         }
    
 }
 
@@ -197,12 +176,42 @@ function cardValue(hand) {
         total-= 10;
         aceCount--
      } 
+    //  console.log(total)
     return total;
 }
 
 
 
-
+function winLogic() {
+    const playerTotal = cardValue(playerHand);
+    const dealerTotal = cardValue(dealerHand);
+    console.log(turn)
+    if(turn === 1) {
+        if (playerTotal > 21) {
+            console.log("Player Bust! Dealer Wins")
+        }
+    }
+     else {
+    if (dealerTotal === playerTotal && dealerTotal <= 21) {
+        console.log("Push")
+    }
+    if (playerTotal === 21) {
+        console.log("You Winsss")
+    }
+    if (dealerTotal === 21) {
+        console.log("Dealer Win")
+    }
+    if (playerTotal > dealerTotal && dealerTotal >= 17) {
+        console.log("You Winsss")
+    }
+    if (playerTotal < dealerTotal && dealerTotal <= 21) {
+        console.log("Dealer Wins")
+    }
+    if (playerTotal < dealerTotal && dealerTotal > 21) {
+        console.log("Dealer Bust! You Winsss")
+    }
+}
+}
 
 
 
@@ -216,19 +225,3 @@ function cardValue(hand) {
 
 init();
 
-// Drawing cards?
-
-
-// init() -> your initial state, think about:
-// -Initializing new deck
-// -clearing player and dealer cards
-// -clearing messages of some sort
-// -update card count
-// -etc
-
-// Dealer and player turn how would we handle it?
-
-
-// Adding card to hand?
-
-// Checking win?
