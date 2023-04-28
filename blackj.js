@@ -174,7 +174,7 @@ function playerTurn() {
 }
 
 function dealerTurn() {
-    drawCard(dealerHand)
+    // drawCard(dealerHand)
     while (cardValue(dealerHand) < 17 && cardValue(playerHand) <= 21) {
         drawCard(dealerHand)
         cardValue(dealerHand)
