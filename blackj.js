@@ -92,9 +92,10 @@ function renderHand() {
         playerNewCard.classList.add('card', `${card}`, 'large')
         playerCardsDiv.append(playerNewCard)
     })
-    dealerHand.forEach(card => {
+    dealerHand.forEach((card, idx) => {
         let dealerNewCard = document.createElement('div')
         dealerNewCard.classList.add('card', `${card}`, 'large')
+        if(idx === 0)  dealerNewCard.classList.add('back-blue')
         dealerCardsDiv.append(dealerNewCard)
     })
 }
@@ -174,7 +175,6 @@ function playerTurn() {
 }
 
 function dealerTurn() {
-    // drawCard(dealerHand)
     while (cardValue(dealerHand) < 17 && cardValue(playerHand) <= 21) {
         drawCard(dealerHand)
         cardValue(dealerHand)
@@ -182,7 +182,10 @@ function dealerTurn() {
     winLogic()
     console.log(dealerHand);
     dealerCardSum.textContent = "Dealer: " + cardValue(dealerHand)
-
+    let allDealerCards = dealerCardsDiv.querySelectorAll('*')
+allDealerCards.forEach(function (dealerCards) {
+    dealerCards.classList.remove('back-blue')
+})
 }
 
 function drawCard(array) {
@@ -297,6 +300,7 @@ function winLogic() {
 
     }
 }
+
 }
 
 

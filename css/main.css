@@ -114,3 +114,7 @@ color: gray;
   color: white;
   background-color: darkgray;
 }
+
+.card-back {
+  background-image: url("../images/backs/blue.svg");
+}
