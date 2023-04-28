@@ -54,9 +54,8 @@ function init () {
     hitBtn.disabled = false;
     stayBtn.disabled = false;
     turn = 1;
-    console.log(dealerHand, playerHand)
-    
 }
+    
 
 function renderHand() {
     playerHand.forEach(card => {
@@ -221,10 +220,8 @@ function winLogic() {
     if(turn === 1) {
       if (playerTotal > 21) {
             gameResult.textContent = 'Player Bust. Dealer Wins!'
-            console.log("Player Bust. Dealer Wins!")
         } 
         if (playerTotal === 21) {
-            console.log("Black-Jack")
             gameResult.textContent = 'Player Black-Jack'
             hitBtn.disabled = true;
             stayBtn.disabled = true;
@@ -232,33 +229,28 @@ function winLogic() {
     }
     else {
         if (dealerTotal === playerTotal && dealerTotal <= 21) {
-            console.log("Push")
             gameResult.textContent = 'Push'
             hitBtn.disabled = true;
             stayBtn.disabled = true;
         }
         if (dealerTotal === 21) {
-            console.log("Dealer Win")
             gameResult.textContent = 'Dealer Wins'
             hitBtn.disabled = true;
             stayBtn.disabled = true;
         }
         if (playerTotal > dealerTotal && dealerTotal >= 17) {
-            console.log("You Winsss")
             gameResult.textContent = 'You Win!'
             hitBtn.disabled = true;
             stayBtn.disabled = true;
             
         }
         if (playerTotal < dealerTotal && dealerTotal <= 21) {
-            console.log("Dealer Wins")
             gameResult.textContent = 'Dealer Wins'
             hitBtn.disabled = true;
             stayBtn.disabled = true;
             
         }
         if (playerTotal < dealerTotal && dealerTotal > 21) {
-            console.log("Dealer Bust! You Winsss")
             gameResult.textContent = 'Dealer Bust You Win!'
             hitBtn.disabled = true;
             stayBtn.disabled = true;
