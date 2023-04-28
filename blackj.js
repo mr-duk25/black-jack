@@ -4,53 +4,35 @@
 const player = 0;
 const dealer = 0;
 
-// -create suits, ranks, and deck
-//- probably use arrays
-
 // /*----- app's state (variables) -----*/
-// -think about state variables
-// ->turn, player, dealer, played cards, count of cards
-
 
 let dealerHand;
 let playerHand;
 let turn = 1;
 let cardCount = 0;
 let playedCards = [];
-
 let deck;
-
-let hidden;
 
 
 
 
 // /*----- cached element references -----*/
 
-// -hit, stand, reset buttons
-//allows player to hit while sum is < 21;
 const hitBtn = document.getElementById("hit");
 const stayBtn = document.getElementById("stay");
 const dealBtn = document.getElementById("deal");
 let hiddenCardImg = document.getElementById("hidden");
 let dealerCardsDiv = document.querySelector(".dealer-cards");
 let playerCardsDiv = document.querySelector(".player-cards");
-// -containers for player and dealer cards
-// -win message
-// -dealer and player score
 let playerSum = document.getElementById("player-sum")
 let dealerCardSum = document.getElementById("dealer-sum");
-
 let gameResult = document.getElementById("results");
-
 
 
 // /*----- event listeners -----*/
 hitBtn.addEventListener('click', handleClickHit)
 stayBtn.addEventListener('click', handleClickStay)
 dealBtn.addEventListener('click', handleClickDeal)
-
-
 
 
 
@@ -72,19 +54,9 @@ function init () {
     hitBtn.disabled = false;
     stayBtn.disabled = false;
     turn = 1;
-    // console.log(dealerHand, playerHand)
     console.log(dealerHand, playerHand)
     
 }
-
-
-// function hiddenCard () {
-//     let hideCard = dealerHand[0]
-//    hideCard.display = ;
-// }
-
-
-
 
 function renderHand() {
     playerHand.forEach(card => {
@@ -111,14 +83,11 @@ function addToHand() {
         dealerCardsDiv.appendChild(dealerNewCard)
     }
 }
-// something like this
    
    
 function handleClickHit(evt) {
    playerTurn()
         }
-        
-        // Exit the loop if the total value of the playerHand is greater than or equal to 21
         
 function handleClickStay(evt) {
      turn *= -1;
@@ -240,7 +209,6 @@ function cardValue(array) {
         stayBtn.disabled = true;
     }
     return cardValue
-    winLogic();
 }
 
 
@@ -250,9 +218,6 @@ function winLogic() {
     const playerTotal = cardValue(playerHand);
     const dealerTotal = cardValue(dealerHand);
     console.log(turn)
-    // if(turn === 1 && playerTotal === 21) {
-    //     gameResult.textContent = 'Black-Jack!'
-    // }
     if(turn === 1) {
       if (playerTotal > 21) {
             gameResult.textContent = 'Player Bust. Dealer Wins!'
@@ -280,7 +245,7 @@ function winLogic() {
         }
         if (playerTotal > dealerTotal && dealerTotal >= 17) {
             console.log("You Winsss")
-            gameResult.textContent = 'You Winsss'
+            gameResult.textContent = 'You Win!'
             hitBtn.disabled = true;
             stayBtn.disabled = true;
             
@@ -294,7 +259,7 @@ function winLogic() {
         }
         if (playerTotal < dealerTotal && dealerTotal > 21) {
             console.log("Dealer Bust! You Winsss")
-            gameResult.textContent = 'Dealer Bust! You Winsss'
+            gameResult.textContent = 'Dealer Bust You Win!'
             hitBtn.disabled = true;
             stayBtn.disabled = true;
 
@@ -308,9 +273,4 @@ function winLogic() {
 
     
          
-            
-            
-
-
-
 init();
